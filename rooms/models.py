@@ -48,7 +48,8 @@ class Photo(core_models.TimeStampModel):
     """ Photo Medel Definition """
 
     caption = models.CharField(max_length=80)
-    file = models.ImageField()
+    # uplaod_to : 저장될 폴더명 지정
+    file = models.ImageField(upload_to="room_photos")
     # room이 지워지면 같이 지워져야 하므로 CASCADE
     # ForeignKey를 string으로 해되됨
     room = models.ForeignKey("Room", related_name="photos", on_delete=models.CASCADE)
