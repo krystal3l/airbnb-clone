@@ -25,6 +25,20 @@ class CustomUserAdmin(UserAdmin):
         ),
     )
 
+    list_filter = UserAdmin.list_filter + ("superhost",)
+
+    list_display = (
+        "username",
+        "first_name",
+        "last_name",
+        "email",
+        "is_active",
+        "currency",
+        "superhost",
+        "is_staff",
+        "is_superuser",
+    )
+
 
 '''
 # decorator : 반드시 class 위에 작성
