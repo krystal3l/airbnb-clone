@@ -88,7 +88,7 @@ class RoomAdmin(admin.ModelAdmin):
     )
 
     # 정렬
-    ordering = ("name", "price", "bedrooms")
+    # ordering = ("name", "price", "bedrooms")
 
     # amenities의 개수를 확인하기 위해 함수를 만듦.
     # self : RoomAdmin class, obj : 객실 정보들!(admin 패널에 보이는 컬럼값들)
@@ -97,6 +97,8 @@ class RoomAdmin(admin.ModelAdmin):
 
     def count_photos(self, obj):
         return obj.photos.count()
+
+    count_photos.short_description = "Photo Count"
 
     # count_amenities 컬럼명 변경
     # count_amenities.short_description = "hello"
