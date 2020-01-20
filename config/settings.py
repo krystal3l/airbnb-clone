@@ -122,7 +122,9 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+# models에서도 내가 설정한 TIME_ZONE(Asia/Seoul)을 적용하려면 False로 바꿔줘야함.
+# https://jupiny.com/2016/10/05/model-datetimefield-in-korean/
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
