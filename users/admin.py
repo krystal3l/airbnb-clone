@@ -20,6 +20,7 @@ class CustomUserAdmin(UserAdmin):
                     "language",
                     "currency",
                     "superhost",
+                    "login_method",
                 )
             },
         ),
@@ -39,6 +40,7 @@ class CustomUserAdmin(UserAdmin):
         "is_superuser",
         "email_secret",
         "email_verified",
+        "login_method",
     )
 
 
