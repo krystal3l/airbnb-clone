@@ -57,12 +57,6 @@ class SignUpView(FormView):
     form_class = forms.SignUpForm
     success_url = reverse_lazy("core:home")
 
-    initial = {
-        "first_name": "krystal1",
-        "last_name": "kang1",
-        "email": "8uartz111@gmail.com",
-    }
-
     def form_valid(self, form):
         form.save()
         email = form.cleaned_data.get("email")
@@ -115,7 +109,7 @@ def github_callback(request):
             if error is not None:  # error일때 github로 다시 로그인
                 raise GithubException()
             else:
-                access_token = result_json.get("access_token")
+                access_token = token_json.get("access_token")
                 profile_request = requests.get(
                     "https://api.github.com/user",
                     headers={
