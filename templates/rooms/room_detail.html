@@ -5,7 +5,19 @@
 {% endblock page_title %}
 
 {% block content %}
-<div>
+
+    <div class="-mt-5 container max-w-full h-75vh flex mb-20">
+        <div class="h-full w-1/2 bg-cover bg-center grid-img" style="background-image: url({{room.first_photo}});"></div>
+        <div class="h-full w-1/2 flex flex-wrap">
+            {% for photo in room.get_next_four_photos %}
+                <div style="background-image: url({{photo.file.url}})" class="w-1/2 h-auto bg-cover bg-center border border-gray-500 grid-img"></div>
+            {% endfor %}
+        </div>
+
+
+    </div>
+
+<!-- <div>
     <h1>{{object.name}}</h1>
     <h3>{{room.description}}</h3>
 </div>
@@ -33,5 +45,5 @@
             <li>{{r}}</li>
         </ul>
     {% endfor %}
-</div>
+</div> -->
 {% endblock content %}
