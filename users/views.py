@@ -240,7 +240,7 @@ class UserProfileView(DetailView):
 
     # profile을 클릭했을 때 다른 user로 대체되는 것을 방지하기 위해 사용.
     context_object_name = "user_obj"
-
+    
     # def get_context_data(self, **kwargs):
     #     context = super().get_context_data(**kwargs)
     #     context["hello"] = "Hello!"

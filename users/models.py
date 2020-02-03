@@ -84,3 +84,7 @@ class User(AbstractUser):
             )
             self.save()
         return
+
+    def avatar_content_type(self):
+        content_width = int(self.avatar.width)
+        return content_width
