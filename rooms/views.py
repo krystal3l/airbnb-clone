@@ -205,12 +205,7 @@ class EditPhotoView(user_mixins.LoggedInOnlyView, SuccessMessageMixin, UpdateVie
 
 class AddPhotoView(user_mixins.LoggedInOnlyView, FormView):
 
-    model = models.Photo
     template_name = "rooms/photo_create.html"
-    fields = (
-        "caption",
-        "file",
-    )
     form_class = forms.CreatePhotoForm
 
     def form_valid(self, form):
@@ -219,3 +214,21 @@ class AddPhotoView(user_mixins.LoggedInOnlyView, FormView):
         messages.success(self.request, "Photo Uploaded")
         return redirect(reverse("rooms:photos", kwargs={"pk": pk}))
 
+
+class CreateRoomView(user_mixins.LoggedInOnlyView, FormView):
+    """
+        CreateView 대신 FormView를 쓰는 이유
+        form을 intercept해야함. 
+        user 정보와 room정보를 같이 저장해야하기 때문
+    """
+
+    form_class = forms.CreateRoomForm
+    template_name = "rooms/room_create.html"
+
+    def form_valid(self, form):
+        room = form.save()
+        room.host = self.request.user
+        room.save()
+        form.save_m2m()
+        messages.success(self.request, "Room Created")
+        return redirect(reverse("rooms:detail", kwargs={"pk": room.pk}))
