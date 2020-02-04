@@ -6,6 +6,7 @@ from django.views.generic import FormView, DetailView, UpdateView
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.core.files.base import ContentFile
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
@@ -240,7 +241,7 @@ class UserProfileView(DetailView):
 
     # profile을 클릭했을 때 다른 user로 대체되는 것을 방지하기 위해 사용.
     context_object_name = "user_obj"
-    
+
     # def get_context_data(self, **kwargs):
     #     context = super().get_context_data(**kwargs)
     #     context["hello"] = "Hello!"
@@ -300,3 +301,11 @@ class UpdatePasswordView(
     def get_success_url(self):
         return self.request.user.get_absolute_url()
 
+
+@login_required
+def switch_hosting(request):
+    try:
+        del request.session["is_hosting"]
+    except KeyError:
+        request.session["is_hosting"] = True
+    return redirect(reverse("core:home"))
